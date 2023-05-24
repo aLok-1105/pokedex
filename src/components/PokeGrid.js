@@ -10,7 +10,7 @@ export default function PokeGrid({pokemon, input}) {
             {pokemon.filter((pokemon)=>{
                 return input.toLowerCase() ===''? pokemon : pokemon.name.toLowerCase().includes(input);
             }).map((pokemon)=>(
-                <PokeCard key={pokemon.id} img={pokemon.image} name={pokemon.name} />
+                <PokeCard key={pokemon.id} img={pokemon.image} name={pokemon.name} type={pokemon.type} />
             ))}
         
     </div>

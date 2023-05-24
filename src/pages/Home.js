@@ -19,7 +19,7 @@ export default function Home() {
 	useEffect(() => {
 		const fetchPokemon = () => {
 			const promises = [];
-			for (let i = 1; i <= 600; i++) {
+			for (let i = 1; i <= 100; i++) {
 				const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
 				promises.push(fetch(url).then((res) => res.json()));
 			}
@@ -34,8 +34,7 @@ export default function Home() {
 							: +result.id
 					}.png`,
 					type: result.types
-						.map((type) => type.type.name)
-						.join(', '),
+						.map((type) => type.type.name),
 					id: result.id,
 				}));
 				// console.log(fetchedPokemon);
