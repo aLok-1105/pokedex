@@ -23,7 +23,6 @@ export default function Home() {
 				const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
 				promises.push(fetch(url).then((res) => res.json()));
 			}
-			console.log(promises);
 			Promise.all(promises).then((results) => {
 				const fetchedPokemon = results.map((result) => ({
 					name: capitalizeFirstLetter(result.name),

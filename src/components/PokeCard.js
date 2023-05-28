@@ -21,6 +21,8 @@ import Water from '../images/WaterType.png'
 
 export default function PokeCard({img, name, type}) {
 
+  console.log(type);
+
   const pokeType = (type)=>{
     if(type === "grass"){
       return Grass;
