@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PokeCard from './PokeCard';
 import PokeGrid from './PokeGrid';
 
@@ -13,28 +13,81 @@ export default function SearchBar() {
   var arr = [];
 
   const handleChange = (e)=>{
-    const promises = [];
     setInput(e.target.value);
-    if(e.target.value){
-      fetch(`https://pokeapi.co/api/v2/pokemon/${e.target.value}`).then(res=>res.json()).then(result => {
-      promises.push(result);
-		    setResults(result);
-		    // console.log(result);
-        setImg(`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${
-          result.id < 10
-            ? '00' + result.id
-            : result.id < 100
-            ? '0' + result.id
-            : +result.id
-        }.png`)
-        Object.values(result)[16].map((e)=>{
-          arr.push(e.type.name)
-          setType(arr);
-        })
-		})
-    
-    }
   }
+  
+
+
+  const notFound = ()=>{
+    return <h1>notFound</h1>
+  }
+
+  // const handleClick = ()=>{
+  //   const promises = [];
+  //   if(input){
+  //     fetch(`https://pokeapi.co/api/v2/pokemon/${input}`).then(res=>res.json()).then(result => {
+  //       if(`https://pokeapi.co/api/v2/pokemon/${input}`){
+  //         promises.push(result);
+	// 	    setResults(result);
+	// 	    // console.log(`https://pokeapi.co/api/v2/pokemon/${input}` === true);
+  //       setImg(`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${
+  //         result.id < 10
+  //           ? '00' + result.id
+  //           : result.id < 100
+  //           ? '0' + result.id
+  //           : +result.id
+  //       }.png`)
+  //       Object.values(result)[16].map((e)=>{
+  //         arr.push(e.type.name)
+  //         setType(arr);
+  //       })
+  //       }
+  //       else{
+  //         console.log("erroe");
+  //       }
+      
+	// 	}).catch((err)=>{return<h1>Not FOund</h1>})
+    
+  //   }
+  // }
+
+  useEffect(() => {
+		const fetchPokemon = () => {
+			const promises = [];
+			// for (let i = 1; i <= 100; i++) {
+				const url = `https://pokeapi.co/api/v2/pokemon/${input}`;
+				promises.push(fetch(url).then((res) => res.json()));
+			// }
+      var fetchedPokemon
+			Promise.all(promises).then((results) => {
+        if(results[0].name){
+          fetchedPokemon = results.map((result) => ({
+            name: (result.name),
+            image: `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${
+              result.id < 10
+                ? '00' + result.id
+                : result.id < 100
+                ? '0' + result.id
+                : +result.id
+            }.png`,
+            type: result.types
+              .map((type) => type.type.name),
+            id: result.id,
+          }));
+          console.log(fetchedPokemon);
+				  setResults(fetchedPokemon);
+        }
+        else{
+          setResults()
+        }
+
+			});
+		};
+		// console.log(pokemon);
+		fetchPokemon();
+	}, [input]);
+
+  // https://img.pokemondb.net/artwork/avif/raichu.avif
 
 
 
@@ -55,24 +108,33 @@ export default function SearchBar() {
   // }
   
 
-  // console.log(type);
+  // if(results!==undefined && results.length !==0) {
+  //   return <PokeCard name={results[0].name} type={results[0].type} img={results[0].image}/>
+  // }
+
+  
 
   // console.log(Object.values(results)[16][1].type.name);
 
   return (
     <div>
       <input onChange={handleChange} value={input}/>
-      <PokeCard name={results.name} type={type} img={img}/>
+      {/* {notFound()} */}
+      {/* {handleClick()} */}
+      {
+        results!==undefined && results.length !==0 ? <PokeCard name={results[0].name} type={results[0].type} img={results[0].image}/> : <h1>NULL</h1>
+      }
+      {/* <PokeCard name={results.name} type={type} img={img}/> */}
+      {/* <button type='button' onClick={handleClick}>Search</button> */}
       <ul>
         {/* {
-          Object.values(results).map((item) => {
-            console.log(item.id);
-            if(name){
-              return <li>{type}</li>
-              return <PokeCard key={id} name={name} />
-            }
+          results ?
+          Object.values(results)[16].map((type) => 
+          
+             <li> {type.type.name} </li>
+          ):
+          '' 
 
-          })
         } */}
 
         
