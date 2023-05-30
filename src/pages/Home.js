@@ -4,22 +4,33 @@ import React, { useEffect, useState } from 'react';
 import PokeGrid from '../components/PokeGrid';
 
 export default function Home() {
-	const [currentPage, setCurrentPage] = useState(1);
+	// const [currentPage, setCurrentPage] = useState(1);
 	const [input, setinput] = useState('');
-	const pokemonsPerPage = 12;
+	// const pokemonsPerPage = 12;
 	const [pokemon, setPokemon] = useState([]);
+	const [index, setIndex] = useState(12);
 
 	function capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
-	const indexOfLastpokemon = currentPage * pokemonsPerPage;
-	const indexOfFirstpokemon = indexOfLastpokemon - pokemonsPerPage;
+	// const indexOfLastpokemon = currentPage * pokemonsPerPage;
+	// const indexOfFirstpokemon = indexOfLastpokemon - pokemonsPerPage;
+
+	const more = ()=>{
+		setIndex(index + 12);
+	}
+	const less = ()=>{
+		if(index>=12){
+			setIndex(index - 12);
+		}
+		
+	}
 
 	useEffect(() => {
 		const fetchPokemon = () => {
 			const promises = [];
-			for (let i = 1; i <= 100; i++) {
+			for (let i = 1; i <= index; i++) {
 				const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
 				promises.push(fetch(url).then((res) => res.json()));
 			}
@@ -43,24 +54,24 @@ export default function Home() {
 		};
 		// console.log(pokemon);
 		fetchPokemon();
-	}, []);
+	}, [index]);
 
-	const filteredpokemons = pokemon.filter((pokemon) =>
-		pokemon.name.toLowerCase().includes(input.toLowerCase())
-	);
+	// const filteredpokemons = pokemon.filter((pokemon) =>
+	// 	pokemon.name.toLowerCase().includes(input.toLowerCase())
+	// );
 
-	const currentpokemons = filteredpokemons.slice(
-		indexOfFirstpokemon,
-		indexOfLastpokemon
-	);
+	// const currentpokemons = filteredpokemons.slice(
+	// 	indexOfFirstpokemon,
+	// 	indexOfLastpokemon
+	// );
 
-	useEffect(() => {
-		setCurrentPage(1);
-	}, [input]);
+	// useEffect(() => {
+	// 	setCurrentPage(1);
+	// }, [input]);
 
-	const handlePageChange = (pageNumber) => {
-		setCurrentPage(pageNumber);
-	};
+	// const handlePageChange = (pageNumber) => {
+	// 	setCurrentPage(pageNumber);
+	// };
 
 	return (
 		<>
@@ -74,9 +85,15 @@ export default function Home() {
 					/>
 				</div>
 				<div>
-					<PokeGrid pokemon={currentpokemons} input={input} />
+					<PokeGrid pokemon={pokemon} input={input} />
 				</div>
-				<div>
+
+				<div className='load-btn'>
+					<button type='button' onClick= {less}>Load Less</button>
+					<button type='button' onClick= {more} >Load More</button>
+				</div>
+
+				{/* <div>
 					{Array.from(
 						{
 							length: Math.ceil(
@@ -93,7 +110,7 @@ export default function Home() {
 							</button>
 						)
 					)}
-				</div>
+				</div> */}
 			</div>
 		</>
 	);

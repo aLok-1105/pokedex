@@ -1,13 +1,16 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+import LOADER from '../gif/loader.gif'
+// import BG_VID from '../Videos/bg-1.mp4'
+
 export default function Navbar() {
   return (
     <>
 			<nav className='navbar navbar-expand-lg bg-body-tertiary'>
 				<div className='container-fluid'>
 					<NavLink className='navbar-brand' to='#' />
-						N
+                    <img src={LOADER} alt='Loading...' style={{width: '50px'}}/>
 					<button
 						className='navbar-toggler'
 						type='button'
