@@ -75,22 +75,22 @@ export default function Home() {
 
 	return (
 		<>
-			<div>
-				<div className='container mt-5'>
-					<input
-						type='text'
-						value={input}
-						onChange={(e) => setinput(e.target.value)}
-						placeholder='Search by name'
-					/>
-				</div>
+			<div style={{marginTop: '100px'}}>
+				
 				<div>
 					<PokeGrid pokemon={pokemon} input={input} />
 				</div>
-
 				<div className='load-btn'>
-					<button type='button' onClick= {less}>Load Less</button>
-					<button type='button' onClick= {more} >Load More</button>
+				<button className="btn " type="button"  onClick= {less}>
+					<span className="spinner-border spinner-border-sm " aria-hidden="true" style={{marginRight: '10px'}}></span>
+					Load Less
+				</button>
+				<button className="btn " type="button" onClick= {more}>
+					<span className="spinner-border spinner-border-sm active"   aria-hidden="true" style={{marginRight: '10px'}}></span>
+					Load More
+				</button>
+					{/* <button type='button' onClick= {less}>Load Less </button>
+					<button type='button' onClick= {more} >Load More</button> */}
 				</div>
 
 				{/* <div>
