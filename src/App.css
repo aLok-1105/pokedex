@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap');
+
+*{
+  font-family: 'Poppins', sans-serif;
+
+}
+
+h1{
+  text-align: center;
+}
+
 .poke-container{
   display: flex;
     justify-content: space-around;
@@ -17,7 +28,7 @@
 }
 
 .card:hover{
-  box-shadow: 2px 2px 5px #9f9f9fbc;
+  box-shadow: 4px 4px 10px #9f9f9f7c;
 }
 
 .type{
@@ -36,9 +47,17 @@
 }
 
 .guess-cont{
+  background-image: url(../src/images/25235_1.png);
+  background-position: center;
+  background-size: cover;
+  padding-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* opacity: 0.5; */
   display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 80px;
 }
 
 
@@ -147,4 +166,70 @@ h5{
     align-items: center;
     flex-direction: column;
 }
+
+.action-btn{
+  display: flex;
+  font-weight: bold;
+}
+
+.check-btn-cont{
+  margin-right: 100px;
+  
+}
+
+.next-img{
+  position: absolute;
+  width: 45px;
+  margin-left: -40px;
+  margin-top: 2px;
+  filter: invert(1);
+  
+}
+
+.next-btn:hover{
+  box-shadow: 2px 2px 5px #555;
+  background-color: rgba(118, 255, 175, 0);
+
+}
+
+.next-btn{
+  border: 0px solid;
+  padding: 5px 11px;
+  border-radius: 3px;
+  padding-right: 30px;
+  font-weight: bold;
+  background: #fff;
+  
+}
+
+.check-btn{
+  border: 0px solid;
+  padding: 5px 11px;
+  border-radius: 3px;
+  background: #fff;
+  font-weight: bold;
+}
+
+.check-btn:hover{
+  background-color: rgba(118, 255, 175, 0);
+  box-shadow: 2px 2px 5px #555;
+}
+
+.Typewriter{
+  display: inline;
+}
+
+.footer{
+  background: #ffffff2b;
+  backdrop-filter: blur(50px);
+  position: absolute;
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.footer p{
+  margin: 4px;
+}
+
 

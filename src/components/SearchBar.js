@@ -66,7 +66,7 @@ export default function SearchBar() {
 						onChange={handleChange} 
 						placeholder='Search by Name or No'
 					/>
-				</div>
+		</div>
     {
       !loading ?
       <div className='search-cont'>
